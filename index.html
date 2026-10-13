@@ -1,0 +1,758 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Iron X Fit Academia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: palco 3D (barra com anilhas) à direita do titulo; depois faixa vermelha, diferenciais em 4 colunas separadas por filetes, video vertical + galeria, preco gigante com pincelada, horarios com "aberto agora", Instagram e endereco. */
+:root {
+  --ink: #07070a;
+  --coal: #0f0f13;
+  --steel: #1a1a20;
+  --line: #2b2b33;
+  --red: #e0131c;
+  --red-hot: #ff2a33;
+  --red-deep: #8f0b11;
+  --chalk: #f3f3f1;
+  --mute: #9b9ba5;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter: 16px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  background: var(--ink);
+  color: var(--chalk);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--red-hot); outline-offset: 3px; }
+
+.wrap { width: min(1200px, calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+.eyebrow {
+  font-family: var(--display); font-weight: 600; text-transform: uppercase;
+  letter-spacing: .22em; font-size: 14px; color: var(--red-hot);
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before { content: ""; width: 34px; height: 2px; background: var(--red); }
+h1, h2, h3 { font-family: var(--display); text-transform: uppercase; margin: 0; text-wrap: balance; line-height: .95; }
+h2 { font-weight: 800; font-style: italic; font-size: clamp(40px, 6vw, 76px); letter-spacing: .005em; }
+h2 em { font-style: italic; color: var(--red); }
+p { margin: 0; }
+
+/* Botoes */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 18px; text-decoration: none; padding: 14px 26px; border: 2px solid var(--red);
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  transition: background .2s, color .2s, transform .2s;
+  cursor: pointer;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-hot); border-color: var(--red-hot); transform: translateY(-2px); }
+.btn-line { background: transparent; color: var(--chalk); border-color: var(--line); }
+.btn-line:hover { border-color: var(--chalk); transform: translateY(-2px); }
+
+/* Cabecalho */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+.brand img { width: 42px; height: 42px; border-radius: 50%; }
+.brand b { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 24px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.brand b i { color: var(--red); }
+.nav { display: none; gap: 30px; }
+.nav a { font-family: var(--display); font-weight: 600; font-size: 16px; text-transform: uppercase; letter-spacing: .14em; text-decoration: none; color: var(--mute); transition: color .2s; }
+.nav a:hover { color: var(--chalk); }
+.top .btn { padding: 9px 18px; font-size: 15px; }
+@media (min-width: 900px) { .nav { display: flex; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(60% 70% at 78% 45%, rgba(224,19,28,.28), transparent 70%),
+    radial-gradient(40% 50% at 10% 100%, rgba(224,19,28,.12), transparent 70%),
+    var(--ink);
+}
+.hero::after { /* grade sutil de piso emborrachado */
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5; pointer-events: none;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(70% 70% at 70% 50%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(70% 70% at 70% 50%, #000 0%, transparent 75%);
+  opacity: .22;
+}
+.hero-in { display: grid; gap: 8px; padding-block: 48px 24px; position: relative; }
+.hero-copy { position: relative; z-index: 2; display: grid; gap: 22px; align-content: center; padding-block: 8px; }
+.status {
+  display: inline-flex; align-items: center; gap: 10px; align-self: start; justify-self: start;
+  font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: 14px;
+  border: 1px solid var(--line); padding: 7px 14px; background: rgba(15,15,19,.7);
+}
+.status i { width: 9px; height: 9px; border-radius: 50%; background: var(--mute); flex: none; }
+.status.on i { background: #35e06b; box-shadow: 0 0 0 0 rgba(53,224,107,.6); animation: pulse 2s infinite; }
+.status.off i { background: var(--red); }
+@keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(53,224,107,0); } 100% { box-shadow: 0 0 0 0 rgba(53,224,107,0); } }
+h1 { font-weight: 800; font-style: italic; font-size: clamp(54px, 10.5vw, 132px); letter-spacing: .005em; }
+h1 span { color: var(--red); display: block; }
+.lead { max-width: 46ch; color: #c9c9d0; font-size: clamp(17px, 2vw, 20px); }
+.lead strong { color: var(--chalk); font-weight: 600; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; padding-top: 6px; font-family: var(--display); text-transform: uppercase; letter-spacing: .12em; font-size: 14px; color: var(--mute); font-weight: 600; }
+.facts b { color: var(--chalk); font-weight: 700; }
+
+.stage { position: relative; height: min(58vh, 470px); min-height: 340px; z-index: 1; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+.stage canvas:active { cursor: grabbing; }
+.tag3d { position: absolute; top: 10px; right: 0; font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 22px; letter-spacing: .06em; color: var(--chalk); pointer-events: none; text-shadow: 0 2px 12px rgba(0,0,0,.8); }
+.tag3d::before { content: ""; display: inline-block; width: 22px; height: 3px; background: var(--red); vertical-align: middle; margin-right: 10px; }
+.picker { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 3; }
+.picker button { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: 14px; color: var(--mute); background: rgba(15,15,19,.78); border: 1px solid var(--line); padding: 7px 16px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.picker button:hover { color: var(--chalk); border-color: var(--mute); }
+.picker button[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+.no-webgl .tag3d, .no-webgl .picker { display: none; }
+.stage .hint { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font-family: var(--display); font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); pointer-events: none; }
+.stage .fallback { display: none; position: absolute; inset: 0; margin: auto; width: min(320px, 70%); border-radius: 50%; }
+.no-webgl .stage .fallback { display: block; }
+.no-webgl .stage canvas, .no-webgl .tag3d { position: absolute; top: 10px; right: 0; font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 22px; letter-spacing: .06em; color: var(--chalk); pointer-events: none; text-shadow: 0 2px 12px rgba(0,0,0,.8); }
+.tag3d::before { content: ""; display: inline-block; width: 22px; height: 3px; background: var(--red); vertical-align: middle; margin-right: 10px; }
+.picker { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 3; }
+.picker button { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: 14px; color: var(--mute); background: rgba(15,15,19,.78); border: 1px solid var(--line); padding: 7px 16px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.picker button:hover { color: var(--chalk); border-color: var(--mute); }
+.picker button[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+.no-webgl .tag3d, .no-webgl .picker { display: none; }
+.stage .hint { display: none; }
+@media (min-width: 900px) {
+  .hero-in { grid-template-columns: 1fr; min-height: 640px; padding-block: 56px; }
+  .hero-copy { max-width: 640px; }
+  .stage { position: absolute; top: 0; bottom: 0; right: -2%; width: 62%; height: auto; min-height: 0; }
+}
+
+/* Faixa */
+.strip { background: var(--red); color: #fff; overflow: hidden; transform: skewY(-1.2deg); margin-block: 28px; border-block: 3px solid var(--ink); }
+.strip-track { display: flex; width: max-content; animation: slide 36s linear infinite; }
+.strip-track span { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: 28px; letter-spacing: .08em; padding: 12px 0; white-space: nowrap; }
+.strip-track span::after { content: "/"; margin-inline: 26px; opacity: .55; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* Secoes */
+section.blk { padding-block: clamp(56px, 9vw, 112px); }
+.head { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 56px); }
+.head p { max-width: 56ch; color: var(--mute); }
+
+/* Diferenciais */
+.perks { display: grid; grid-template-columns: minmax(0,1fr); }
+.perk { min-width: 0; padding: 28px 4px; display: grid; gap: 14px; justify-items: start; border-top: 1px solid var(--line); }
+.perk .ico { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--red); display: grid; place-items: center; background: radial-gradient(circle at 30% 25%, rgba(224,19,28,.35), var(--coal)); box-shadow: 0 0 28px rgba(224,19,28,.25); }
+.perk .ico svg { width: 30px; height: 30px; stroke: var(--chalk); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.perk h3 { font-weight: 700; font-size: 26px; letter-spacing: .03em; line-height: 1; }
+.perk p { color: var(--mute); font-size: 16px; }
+@media (min-width: 600px) and (max-width: 899px) {
+  .perks { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .perk:nth-child(even) { border-left: 1px solid var(--line); }
+}
+@media (min-width: 900px) {
+  .perks { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .perk { border-top: 0; padding: 12px 30px; }
+  .perk + .perk { border-left: 1px solid var(--red-deep); }
+  .perk:first-child { padding-left: 0; }
+}
+
+/* Estrutura */
+.struct { background: var(--coal); border-block: 1px solid var(--line); }
+.struct-grid { display: grid; gap: 40px; align-items: center; }
+.reel { position: relative; width: min(100%, 360px); margin-inline: auto; aspect-ratio: 9 / 16; border: 2px solid var(--line); overflow: hidden; background: #000; box-shadow: 0 0 0 6px var(--ink), 0 0 0 8px var(--red), 0 30px 80px rgba(224,19,28,.28); clip-path: none; }
+.reel video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.8) contrast(1.15) brightness(.9); }
+.reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(224,19,28,.28), transparent 35%, transparent 65%, rgba(7,7,10,.8)); mix-blend-mode: multiply; pointer-events: none; }
+.reel .tag { position: absolute; left: 14px; bottom: 14px; z-index: 2; font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.reel .tag i { width: 8px; height: 8px; background: var(--red-hot); border-radius: 50%; animation: pulse 2s infinite; }
+.reel .pp { position: absolute; right: 12px; bottom: 10px; z-index: 3; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--mute); background: rgba(7,7,10,.6); color: var(--chalk); cursor: pointer; display: grid; place-items: center; }
+.reel .pp svg { width: 16px; height: 16px; fill: currentColor; }
+.struct-copy { display: grid; gap: 22px; min-width: 0; }
+.struct-copy .list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.struct-copy .list div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.struct-copy .list dt, .struct-copy .list span.k { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--red-hot); padding-top: 3px; }
+.struct-copy .list span.v { color: #c9c9d0; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: clamp(40px, 6vw, 72px); }
+.shots figure { margin: 0; position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--steel); }
+.shots img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.85) contrast(1.1) brightness(.85); transition: filter .4s, transform .6s; }
+.shots figure:hover img { filter: none; transform: scale(1.05); }
+.shots figure::after { content: ""; position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--red); transform: scaleX(.2); transform-origin: left; transition: transform .4s; }
+.shots figure:hover::after { transform: scaleX(1); }
+@media (min-width: 760px) { .shots { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (min-width: 900px) { .struct-grid { grid-template-columns: 380px 1fr; gap: 72px; } }
+
+/* Mensalidade */
+.price-grid { display: grid; gap: 40px; align-items: center; }
+.price { position: relative; display: grid; gap: 4px; justify-items: start; }
+.brush { position: relative; display: inline-block; padding: 14px 54px 14px 22px; font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: clamp(30px, 5vw, 52px); line-height: 1; background: var(--red); clip-path: polygon(0 12%, 4% 0, 96% 6%, 100% 40%, 97% 100%, 3% 92%); }
+.brand-line { font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; letter-spacing: .06em; font-size: clamp(22px, 3vw, 30px); color: var(--mute); margin-top: 10px; }
+.amount { display: flex; align-items: flex-start; gap: 6px; line-height: .8; font-family: var(--display); font-weight: 800; font-style: italic; }
+.amount .cur { font-size: clamp(40px, 7vw, 80px); padding-top: .18em; color: var(--chalk); }
+.amount .num { font-size: clamp(150px, 26vw, 300px); background: linear-gradient(180deg, #fff 10%, #b9b9c0 55%, #6b6b74 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 2px var(--red); letter-spacing: -.02em; filter: drop-shadow(0 8px 0 var(--red-deep)); }
+.amount .cents { font-size: clamp(28px, 5vw, 56px); padding-top: .25em; color: var(--chalk); }
+.price .per { font-family: var(--display); font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--mute); }
+.price .note { color: var(--mute); max-width: 44ch; font-size: 16px; margin-top: 14px; }
+.price .btn { margin-top: 18px; }
+.poster { position: relative; justify-self: center; width: min(calc(100% - 20px), 540px); margin-right: 20px; }
+.poster img { width: 100%; height: auto; display: block; border: 1px solid var(--line); box-shadow: 0 0 0 1px var(--ink), 0 40px 90px rgba(224,19,28,.35); }
+.poster::before { content: ""; position: absolute; inset: 20px -20px -20px 20px; border: 2px solid var(--red); z-index: -1; }
+@media (min-width: 900px) { .price-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+/* Horarios */
+.hours { background: linear-gradient(180deg, var(--ink), var(--coal)); border-top: 1px solid var(--line); }
+.hours-grid { display: grid; gap: 40px; align-items: start; }
+.lunch { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; border: 2px solid var(--red); padding: 22px; background: radial-gradient(circle at 0 0, rgba(224,19,28,.18), transparent 60%), var(--coal); box-shadow: 0 0 40px rgba(224,19,28,.18); }
+.clock { width: 84px; height: 84px; flex: none; }
+.clock circle.rim { fill: none; stroke: var(--red-hot); stroke-width: 4; filter: drop-shadow(0 0 6px rgba(255,42,51,.8)); }
+.clock .tick { stroke: var(--red-hot); stroke-width: 3; stroke-linecap: round; }
+.clock .hand { stroke: var(--chalk); stroke-width: 4; stroke-linecap: round; transform-origin: 50px 50px; }
+.lunch small { display: block; font-family: var(--display); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); font-size: 14px; }
+.lunch strong { display: block; font-family: var(--display); font-weight: 800; font-style: italic; text-transform: uppercase; font-size: clamp(34px, 5vw, 48px); line-height: 1; color: var(--red-hot); }
+.sched { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.sched li { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 16px; padding: 20px 14px; border-bottom: 1px solid var(--line); position: relative; }
+.sched .d { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: 17px; color: var(--mute); }
+.sched .t { font-family: var(--display); font-weight: 800; font-style: italic; font-size: clamp(30px, 5vw, 44px); line-height: 1; font-variant-numeric: tabular-nums; text-transform: uppercase; }
+.sched .closed .t { color: var(--red); }
+.sched li.today { background: linear-gradient(90deg, rgba(224,19,28,.2), transparent); }
+.sched li.today::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
+.sched li.today .d { color: var(--chalk); }
+.sched li.today .d::after { content: " / hoje"; color: var(--red-hot); }
+@media (min-width: 900px) { .hours-grid { grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; } }
+
+/* Instagram */
+.ig-card { display: grid; gap: 28px; border: 1px solid var(--line); padding: clamp(22px, 4vw, 48px); background: radial-gradient(70% 120% at 100% 0, rgba(224,19,28,.2), transparent 60%), var(--coal); align-items: center; }
+.ig-id { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+.ig-id img { width: 92px; height: 92px; border-radius: 50%; border: 2px solid var(--red); }
+.ig-id b { display: block; font-family: var(--display); font-size: 30px; font-weight: 800; font-style: italic; text-transform: uppercase; line-height: 1; }
+.ig-id span { color: var(--mute); }
+.ig-meta { display: flex; gap: 28px; flex-wrap: wrap; font-family: var(--display); text-transform: uppercase; letter-spacing: .1em; color: var(--mute); font-weight: 600; font-size: 14px; margin-top: 8px; }
+.ig-meta b { display: block; font-size: 32px; color: var(--chalk); letter-spacing: 0; line-height: 1; font-weight: 800; }
+.ig-bio { display: grid; gap: 10px; }
+.ig-bio p { color: #c9c9d0; }
+.ig-bio .pillars { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; color: var(--red-hot); font-size: 18px; }
+@media (min-width: 900px) { .ig-card { grid-template-columns: 1fr 1fr; gap: 56px; } }
+
+/* Contato */
+.contact-grid { display: grid; gap: 28px; }
+.c-item { display: grid; gap: 6px; padding: 22px 0; border-top: 1px solid var(--line); }
+.c-item small { font-family: var(--display); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; font-size: 14px; color: var(--red-hot); }
+.c-item p, .c-item a.v { font-size: 20px; text-decoration: none; overflow-wrap: anywhere; }
+.c-item a.v:hover { color: var(--red-hot); }
+.contact-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 40px; } }
+
+/* Rodape */
+footer { border-top: 1px solid var(--line); padding-block: 40px calc(40px + 70px); background: #050507; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+footer .pill { font-family: var(--display); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; font-size: 14px; color: var(--mute); }
+footer small { color: var(--mute); font-size: 14px; }
+
+/* WhatsApp flutuante */
+.wa-fab {
+  position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 60;
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  background: var(--red); color: #fff; padding: 13px 20px 13px 16px; border-radius: 999px;
+  font-family: var(--display); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 16px;
+  box-shadow: 0 10px 30px rgba(224,19,28,.5), 0 0 0 1px rgba(255,255,255,.12) inset; transition: transform .2s, background .2s;
+}
+.wa-fab:hover { background: var(--red-hot); transform: translateY(-3px); }
+.wa-fab svg { width: 24px; height: 24px; }
+
+@media (max-width: 480px) {
+  .top .btn span { display: none; }
+  .brand b { font-size: 21px; }
+  .btn { font-size: 16px; padding: 13px 20px; }
+  .struct-copy .list div { grid-template-columns: 1fr; gap: 2px; }
+  .lunch { grid-template-columns: 1fr; justify-items: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .strip-track, .status.on i, .reel .tag i { animation: none; }
+  .btn, .shots img, .wa-fab { transition: none; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#topo" aria-label="Iron X Fit Academia">
+      <img src="assets/logo.jpg" width="42" height="42" alt="">
+      <b>Iron <i>X</i> Fit</b>
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#mensalidade">Mensalidade</a>
+      <a href="#horarios">Horários</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-red" data-wa href="https://instagram.com/academiaironx" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.43 1.34-1.97 1.4-.5.06-1.13.09-1.82-.12a16.6 16.6 0 0 1-1.65-.61c-2.9-1.25-4.8-4.17-4.94-4.37-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.4.26-.3.57-.37.76-.37h.55c.18 0 .42-.07.65.5.25.58.84 2 .91 2.15.07.14.12.31.02.5-.1.2-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.3-.12.58.17.29.74 1.22 1.6 1.98 1.1.98 2.03 1.28 2.31 1.43.29.14.46.12.63-.07.17-.2.72-.84.91-1.12.19-.29.38-.24.64-.14.27.1 1.67.79 1.96.93.29.14.48.22.55.34.07.12.07.7-.18 1.4Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<main id="topo">
+<section class="hero" aria-label="Apresentação">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <div class="eyebrow">Academia &middot; Luís Eduardo Magalhães-BA</div>
+      <div class="status" id="status" role="status"><i></i><span>Verificando horário</span></div>
+      <h1>Mais que treino, <span>é evolução.</span></h1>
+      <p class="lead">Treino, saúde e performance com <strong>professores qualificados</strong> e estrutura completa. Mensalidade de <strong>R$&nbsp;100,00</strong>.</p>
+      <div class="cta">
+        <a class="btn btn-red" data-wa href="https://instagram.com/academiaironx" target="_blank" rel="noopener">Quero treinar</a>
+        <a class="btn btn-line" href="#estrutura">Ver a estrutura</a>
+      </div>
+      <div class="facts">
+        <span><b>Seg a sex</b> 05h às 22h</span>
+        <span><b>Sáb</b> 08h às 12h</span>
+        <span><b>Sem pausa</b> no almoço</span>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-label="Equipamentos de academia em 3D. Arraste para girar." role="img"></canvas>
+      <img class="fallback" src="assets/logo.jpg" alt="Logo Iron X Fit">
+      <div class="tag3d" id="tag3d"></div>
+      <div class="picker" id="picker" role="group" aria-label="Escolher equipamento em 3D"></div>
+      <div class="hint">Arraste para girar</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="track"></div>
+</div>
+
+<section class="blk" id="diferenciais">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Por que a Iron X Fit</div>
+      <h2>Tudo para você <em>evoluir</em></h2>
+    </div>
+    <div class="perks">
+      <div class="perk">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h2M20 12h2M5 8v8M7.5 6v12M16.5 6v12M19 8v8M7.5 12h9"/></svg></div>
+        <h3>Estrutura completa</h3>
+        <p>Máquinas de carga guiada, pesos livres e piso emborrachado.</p>
+      </div>
+      <div class="perk">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.2c3 0 5 2 5 5.2"/></svg></div>
+        <h3>Professores para orientação</h3>
+        <p>Equipe qualificada para ajudar no treino do iniciante ao avançado.</p>
+      </div>
+      <div class="perk">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.3 12 20 12 20Z"/><path d="M5 12h4l1.5-2.5 2 5 1.5-2.5H19"/></svg></div>
+        <h3>Saúde e qualidade de vida</h3>
+        <p>Treino regular que cuida do corpo e rende mais disposição no dia a dia.</p>
+      </div>
+      <div class="perk">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+        <h3>Ambiente motivador</h3>
+        <p>Foco, força e disciplina em um salão iluminado e cheio de energia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk struct" id="estrutura">
+  <div class="wrap struct-grid">
+    <div class="reel">
+      <video id="reel" src="assets/academia.mp4" poster="assets/poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="tag"><i></i> O salão por dentro</div>
+      <button class="pp" id="pp" type="button" aria-label="Pausar vídeo"><svg viewBox="0 0 16 16" aria-hidden="true"><path id="ppi" d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></button>
+    </div>
+    <div class="struct-copy">
+      <div class="eyebrow">Conheça a estrutura</div>
+      <h2>Equipamento <em>pesado</em>, salão limpo</h2>
+      <p class="lead" style="color:var(--mute)">Veja como é treinar na Iron X Fit. Os aparelhos ficam organizados por grupo muscular e o espaço entre eles dá liberdade para se movimentar.</p>
+      <div class="list">
+        <div><span class="k">Máquinas</span><span class="v">Puxadas, remadas, supino articulado, rosca e outros aparelhos de carga guiada.</span></div>
+        <div><span class="k">Piso</span><span class="v">Borracha de alta densidade, que protege as articulações e os pesos.</span></div>
+        <div><span class="k">Ambiente</span><span class="v">Iluminação em LED no teto e ventilação em todo o salão.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="shots">
+      <figure><img src="assets/frame_1.jpg" alt="Puxada alta com banco de apoio"></figure>
+      <figure><img src="assets/frame_4.jpg" alt="Máquina de remada com carga livre"></figure>
+      <figure><img src="assets/frame_13.jpg" alt="Aparelho de rosca scott"></figure>
+      <figure><img src="assets/frame_22.jpg" alt="Supino articulado"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="mensalidade">
+  <div class="wrap price-grid">
+    <div class="price">
+      <div class="brush">Mensalidade</div>
+      <div class="brand-line">por apenas</div>
+      <div class="amount" aria-label="100 reais e zero centavos"><span class="cur">R$</span><span class="num">100</span><span class="cents">,00</span></div>
+      <div class="per">por mês</div>
+      <p class="note">Venha aproveitar! Confirme condições e formas de pagamento direto com a recepção.</p>
+      <a class="btn btn-red" data-wa href="https://instagram.com/academiaironx" target="_blank" rel="noopener">Quero me matricular</a>
+    </div>
+    <div class="poster">
+      <img src="assets/banner.jpg" alt="Arte de divulgação: mensalidade por apenas R$100,00 na Iron X Fit" width="1000" height="1200">
+    </div>
+  </div>
+</section>
+
+<section class="blk hours" id="horarios">
+  <div class="wrap hours-grid">
+    <div>
+      <div class="head" style="margin-bottom:28px">
+        <div class="eyebrow">Horário de funcionamento</div>
+        <h2>Abre cedo, <em>fecha tarde</em></h2>
+      </div>
+      <div class="lunch">
+        <svg class="clock" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="rim" cx="50" cy="50" r="44"/>
+          <g class="tick"><line x1="50" y1="12" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="88"/><line x1="12" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="88" y2="50"/></g>
+          <line class="hand" x1="50" y1="50" x2="50" y2="24"/>
+          <line class="hand" x1="50" y1="50" x2="68" y2="62" id="hand2"/>
+          <circle cx="50" cy="50" r="4" fill="#f3f3f1"/>
+        </svg>
+        <div>
+          <small>Não fechamos no horário de almoço</small>
+          <strong>Durante o dia todo aberto</strong>
+        </div>
+      </div>
+    </div>
+    <ul class="sched" id="sched">
+      <li data-d="1,2,3,4,5"><span class="d">Segunda a sexta</span><span class="t">05h às 22h</span></li>
+      <li data-d="6"><span class="d">Sábado</span><span class="t">08h às 12h</span></li>
+      <li data-d="0" class="closed"><span class="d">Domingo</span><span class="t">Fechado</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="blk" id="comunidade">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Comunidade</div>
+      <h2>Acompanhe a <em>rotina</em></h2>
+    </div>
+    <div class="ig-card">
+      <div>
+        <div class="ig-id">
+          <img src="assets/logo.jpg" alt="" width="92" height="92" loading="lazy">
+          <div><b>Iron X Fit</b><span>@academiaironx</span></div>
+        </div>
+        <div class="ig-meta">
+          <div><b>13,3 mil</b>seguidores</div>
+          <div><b>R$ 100</b>mensalidade</div>
+        </div>
+      </div>
+      <div class="ig-bio">
+        <div class="pillars">Treino &middot; Saúde &middot; Performance</div>
+        <p>Treinos do dia, desafios como o Desafio Feminino, exercícios com orientação dos professores e os horários atualizados da academia.</p>
+        <div class="cta"><a class="btn btn-red" href="https://instagram.com/academiaironx" target="_blank" rel="noopener">Seguir no Instagram</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="contato" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Contato</div>
+      <h2>Faça parte da <em>Iron X Fit</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="c-item"><small>Endereço</small><p>Rua Teixeira de Freitas, Florais Léa II<br>Luís Eduardo Magalhães &ndash; BA</p>
+        <div class="contact-cta"><a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Rua+Teixeira+de+Freitas+Luis+Eduardo+Magalhaes+BA" target="_blank" rel="noopener">Abrir no mapa</a></div></div>
+      <div class="c-item"><small>WhatsApp</small><p id="waNumber">Fale com a recepção pelo botão abaixo.</p>
+        <div class="contact-cta"><a class="btn btn-red" data-wa href="https://instagram.com/academiaironx" target="_blank" rel="noopener">Chamar no WhatsApp</a></div></div>
+      <div class="c-item"><small>Instagram</small><a class="v" href="https://instagram.com/academiaironx" target="_blank" rel="noopener">@academiaironx</a>
+        <p style="color:var(--mute);font-size:16px">Seg a sex 05h às 22h &middot; Sáb 08h às 12h &middot; Dom fechado</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#topo"><img src="assets/logo.jpg" width="42" height="42" alt=""><b>Iron <i>X</i> Fit</b></a>
+    <div class="pill">Saúde &nbsp;|&nbsp; Disciplina &nbsp;|&nbsp; Resultados</div>
+    <small>&copy; 2026 Iron X Fit Academia</small>
+  </div>
+</footer>
+
+<a class="wa-fab" data-wa href="https://instagram.com/academiaironx" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.43 1.34-1.97 1.4-.5.06-1.13.09-1.82-.12a16.6 16.6 0 0 1-1.65-.61c-2.9-1.25-4.8-4.17-4.94-4.37-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.4.26-.3.57-.37.76-.37h.55c.18 0 .42-.07.65.5.25.58.84 2 .91 2.15.07.14.12.31.02.5-.1.2-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.3-.12.58.17.29.74 1.22 1.6 1.98 1.1.98 2.03 1.28 2.31 1.43.29.14.46.12.63-.07.17-.2.72-.84.91-1.12.19-.29.38-.24.64-.14.27.1 1.67.79 1.96.93.29.14.48.22.55.34.07.12.07.7-.18 1.4Z"/></svg>
+  WhatsApp
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===== CONFIGURAÇÃO =====
+   Coloque aqui o número do WhatsApp com DDI e DDD, só dígitos. Exemplo: "5577999999999".
+   Enquanto estiver vazio, os botões de WhatsApp levam ao Instagram da academia. */
+const WHATSAPP = "557798297609";
+const MENSAGEM = "Olá! Vi o site da Iron X Fit e gostaria de saber mais sobre os planos.";
+
+(function () {
+  /* WhatsApp */
+  if (WHATSAPP) {
+    const href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MENSAGEM);
+    document.querySelectorAll("[data-wa]").forEach(a => { a.href = href; });
+    const d = WHATSAPP.replace(/^55/, "");
+    const n = document.getElementById("waNumber");
+    if (n && d.length >= 10) n.textContent = "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4);
+  }
+
+  /* Faixa */
+  const words = ["Saúde", "Disciplina", "Resultados", "Foco", "Força", "Evolução"];
+  const track = document.getElementById("track");
+  let html = "";
+  for (let i = 0; i < 4; i++) words.forEach(w => { html += "<span>" + w + "</span>"; });
+  track.innerHTML = html;
+
+  /* Aberto agora (horário de Brasília) */
+  const sched = { 0: null, 1: [5, 22], 2: [5, 22], 3: [5, 22], 4: [5, 22], 5: [5, 22], 6: [8, 12] };
+  const names = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+  const get = t => parts.find(p => p.type === t).value;
+  const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday"));
+  const hr = (+get("hour")) % 24 + (+get("minute")) / 60;
+  const pad = h => String(h).padStart(2, "0") + "h";
+  const st = document.getElementById("status");
+  const today = sched[day];
+  if (today && hr >= today[0] && hr < today[1]) {
+    st.className = "status on"; st.querySelector("span").textContent = "Aberto agora · até " + pad(today[1]);
+  } else {
+    let next = null, add = 0;
+    if (today && hr < today[0]) { next = { d: day, h: today[0], add: 0 }; }
+    else {
+      for (let i = 1; i <= 7 && !next; i++) { const nd = (day + i) % 7; if (sched[nd]) next = { d: nd, h: sched[nd][0], add: i }; }
+    }
+    const when = next.add === 0 ? "hoje" : next.add === 1 ? "amanhã" : names[next.d];
+    st.className = "status off"; st.querySelector("span").textContent = "Fechado agora · abre " + when + " às " + pad(next.h);
+  }
+  document.querySelectorAll("#sched li").forEach(li => { if (li.dataset.d.split(",").includes(String(day))) li.classList.add("today"); });
+
+  /* Relógio gira */
+  const hand = document.getElementById("hand2");
+  if (hand && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    hand.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: 60000, iterations: Infinity });
+  }
+
+  /* Vídeo */
+  const v = document.getElementById("reel"), pp = document.getElementById("pp"), ppi = document.getElementById("ppi");
+  const PAUSE = "M3 2h4v12H3zM9 2h4v12H9z", PLAY = "M4 2l10 6-10 6z";
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); ppi.setAttribute("d", PLAY); }
+  pp.addEventListener("click", () => {
+    if (v.paused) { v.play().catch(() => {}); ppi.setAttribute("d", PAUSE); pp.setAttribute("aria-label", "Pausar vídeo"); }
+    else { v.pause(); ppi.setAttribute("d", PLAY); pp.setAttribute("aria-label", "Reproduzir vídeo"); }
+  });
+
+  /* ===== 3D: barra olímpica com anilhas ===== */
+  const canvas = document.getElementById("gl");
+  const stage = document.getElementById("stage");
+  try {
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(0, 0.4, 13);
+
+    /* ambiente: softboxes para o metal refletir */
+    const ec = document.createElement("canvas"); ec.width = 1024; ec.height = 512;
+    const g = ec.getContext("2d");
+    let grad = g.createLinearGradient(0, 0, 0, 512);
+    grad.addColorStop(0, "#2a2a32"); grad.addColorStop(.5, "#0c0c10"); grad.addColorStop(1, "#050507");
+    g.fillStyle = grad; g.fillRect(0, 0, 1024, 512);
+    g.fillStyle = "#ffffff"; g.fillRect(120, 60, 180, 90); g.fillRect(560, 40, 260, 70);
+    g.fillStyle = "#ff2a33"; g.fillRect(380, 150, 60, 230); g.fillRect(900, 120, 70, 260);
+    g.fillStyle = "#9aa0b0"; g.fillRect(0, 230, 1024, 8);
+    const envTex = new THREE.CanvasTexture(ec);
+    envTex.mapping = THREE.EquirectangularReflectionMapping; envTex.encoding = THREE.sRGBEncoding;
+    const pm = new THREE.PMREMGenerator(renderer);
+    scene.environment = pm.fromEquirectangular(envTex).texture;
+
+    scene.add(new THREE.AmbientLight(0xffffff, .25));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(-5, 6, 7); scene.add(key);
+    const rimR = new THREE.PointLight(0xff2a33, 60, 30); rimR.position.set(6, 1, -4); scene.add(rimR);
+    const rimL = new THREE.PointLight(0xe0131c, 30, 30); rimL.position.set(-6, -3, 3); scene.add(rimL);
+
+    /* textura da face da anilha */
+    function face(bg, ring, txt, label, kg) {
+      const c = document.createElement("canvas"); c.width = c.height = 512;
+      const x = c.getContext("2d");
+      x.fillStyle = bg; x.fillRect(0, 0, 512, 512);
+      for (let i = 0; i < 1400; i++) { x.fillStyle = "rgba(255,255,255," + (Math.random() * .035) + ")"; x.fillRect(Math.random() * 512, Math.random() * 512, 2, 2); }
+      x.lineWidth = 14; x.strokeStyle = ring; x.beginPath(); x.arc(256, 256, 232, 0, 7); x.stroke();
+      x.lineWidth = 3; x.strokeStyle = "rgba(255,255,255,.18)"; x.beginPath(); x.arc(256, 256, 200, 0, 7); x.stroke();
+      x.beginPath(); x.arc(256, 256, 120, 0, 7); x.stroke();
+      x.fillStyle = txt; x.textAlign = "center";
+      x.font = "italic 800 62px 'Barlow Condensed', Impact, sans-serif"; x.fillText(label, 256, 392);
+      x.font = "italic 800 120px 'Barlow Condensed', Impact, sans-serif"; x.fillText(kg, 256, 168);
+      const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = 4;
+      return t;
+    }
+    const black = { bg: "#121216", ring: "#e0131c", txt: "#f3f3f1" };
+    const red = { bg: "#c70f18", ring: "#f3f3f1", txt: "#ffffff" };
+
+    function plate(r, t, style, kg) {
+      const grp = new THREE.Group();
+      const sideM = new THREE.MeshStandardMaterial({ color: style === red ? 0x8f0b11 : 0x15151a, metalness: .7, roughness: .38 });
+      const capM = new THREE.MeshStandardMaterial({ map: face(style.bg, style.ring, style.txt, "IRON X FIT", kg), metalness: .45, roughness: .45 });
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, t, 72), [sideM, capM, capM]);
+      grp.add(body);
+      const rim = new THREE.Mesh(new THREE.TorusGeometry(r, t * .22, 14, 96), new THREE.MeshStandardMaterial({ color: 0xb8bcc8, metalness: 1, roughness: .25 }));
+      rim.rotation.x = Math.PI / 2; grp.add(rim);
+      const hub = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, t + .03, 36), new THREE.MeshStandardMaterial({ color: 0xc9ccd6, metalness: 1, roughness: .22 }));
+      grp.add(hub);
+      return grp;
+    }
+
+    const chrome = new THREE.MeshStandardMaterial({ color: 0xd4d7df, metalness: 1, roughness: .22 });
+    const dark = new THREE.MeshStandardMaterial({ color: 0x1a1a20, metalness: .9, roughness: .35 });
+    const redM = new THREE.MeshStandardMaterial({ color: 0xe0131c, metalness: .6, roughness: .35, emissive: 0x4a0508 });
+
+    const root = new THREE.Group(); scene.add(root);
+    const items = [];
+    function addItem(label, inner, dimH, dimV, spin) {
+      const g = new THREE.Group(); g.add(inner); g.visible = false; g.scale.setScalar(.001); root.add(g);
+      items.push({ label, g, inner, dimH, dimV, spin, s: 0, k: 1 });
+    }
+
+    /* 1. Barra olímpica */
+    const bell = new THREE.Group();
+    bell.add(new THREE.Mesh(new THREE.CylinderGeometry(.075, .075, 2.8, 40), chrome));
+    bell.add(new THREE.Mesh(new THREE.CylinderGeometry(.082, .082, 1.1, 40), dark));
+    [-1, 1].forEach(s => {
+      const sl = new THREE.Mesh(new THREE.CylinderGeometry(.13, .13, 2.2, 40), chrome); sl.position.y = s * 2.5; bell.add(sl);
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(.14, .11, .1, 40), chrome); cap.position.y = s * 3.64; bell.add(cap);
+      const stop = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, .1, 40), dark); stop.position.y = s * 1.46; bell.add(stop);
+      let y = 1.68;
+      [[1.18, .24, black, "20"], [1.0, .19, red, "15"], [.82, .15, black, "10"]].forEach(sp => {
+        const p = plate(sp[0], sp[1], sp[2], sp[3]); p.position.y = s * (y + sp[1] / 2); bell.add(p); y += sp[1] + .03;
+      });
+      const collar = new THREE.Mesh(new THREE.CylinderGeometry(.22, .22, .22, 36), redM); collar.position.y = s * (y + .14); bell.add(collar);
+    });
+    bell.rotation.order = "ZYX"; bell.rotation.z = Math.PI / 2;
+    addItem("Barra olímpica", bell, 4.1, 1.3, { axis: "y", v: .35 });
+
+    /* 2. Halter hexagonal */
+    const db = new THREE.Group();
+    const handle = new THREE.Mesh(new THREE.CylinderGeometry(.11, .11, 1.9, 36), chrome); db.add(handle);
+    const grip = new THREE.Mesh(new THREE.CylinderGeometry(.118, .118, .9, 36), dark); db.add(grip);
+    const hexM = new THREE.MeshStandardMaterial({ color: 0x18181e, metalness: .75, roughness: .38 });
+    [-1, 1].forEach(s => {
+      const neck = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, .22, 36), chrome); neck.position.y = s * .98; db.add(neck);
+      const head = new THREE.Mesh(new THREE.CylinderGeometry(.68, .68, .95, 6), hexM); head.position.y = s * 1.5; db.add(head);
+      const band = new THREE.Mesh(new THREE.CylinderGeometry(.695, .695, .16, 6), redM); band.position.y = s * 1.5; db.add(band);
+      const face2 = new THREE.Mesh(new THREE.CylinderGeometry(.46, .46, .06, 6), chrome); face2.position.y = s * 2.0; db.add(face2);
+      const inset = new THREE.Mesh(new THREE.CylinderGeometry(.34, .34, .075, 6), redM); inset.position.y = s * 2.0; db.add(inset);
+    });
+    db.rotation.order = "ZYX"; db.rotation.z = Math.PI / 2;
+    addItem("Halter", db, 2.1, 1.0, { axis: "y", v: .35 });
+
+    /* 3. Kettlebell */
+    const kb = new THREE.Group();
+    const prof = [[0, -.85], [.6, -.85], [.8, -.74], [.93, -.4], [.97, .05], [.9, .45], [.68, .78], [.4, .95], [.0, 1.0]].map(p => new THREE.Vector2(p[0], p[1]));
+    const kbody = new THREE.Mesh(new THREE.LatheGeometry(prof, 64), new THREE.MeshStandardMaterial({ color: 0x17171c, metalness: .75, roughness: .42 })); kb.add(kbody);
+    const kh = new THREE.Mesh(new THREE.TorusGeometry(.52, .13, 24, 64), dark); kh.position.y = 1.08; kb.add(kh);
+    [[-.3, .955], [.1, .975]].forEach(a => { const t = new THREE.Mesh(new THREE.TorusGeometry(a[1], .035, 12, 80), redM); t.rotation.x = Math.PI / 2; t.position.y = a[0]; kb.add(t); });
+    const kbase = new THREE.Mesh(new THREE.CylinderGeometry(.62, .66, .06, 48), chrome); kbase.position.y = -.87; kb.add(kbase);
+    kb.position.y = -.4;
+    addItem("Kettlebell", kb, 1.15, 1.5, { axis: "y", v: .5 });
+
+    /* 4. Anilhas empilhadas */
+    const stack = new THREE.Group();
+    [[1.5, .3, black, "20", -.3], [1.28, .24, red, "15", .02], [1.06, .2, black, "10", .3]].forEach(sp => {
+      const p = plate(sp[0], sp[1], sp[2], sp[3]); p.position.y = sp[4]; stack.add(p);
+    });
+    stack.rotation.order = "XYZ"; stack.rotation.x = Math.PI / 2;
+    addItem("Anilhas", stack, 1.7, 1.7, { axis: "y", v: .3 });
+
+    /* chão */
+    const glow = new THREE.Mesh(new THREE.CircleGeometry(4.2, 64), new THREE.MeshBasicMaterial({ color: 0xe0131c, transparent: true, opacity: .16 }));
+    glow.rotation.x = -Math.PI / 2; glow.position.y = -1.7; scene.add(glow);
+
+    /* seletor */
+    let cur = 0, lastUser = -1e9, lastSwitch = 0;
+    const picker = document.getElementById("picker"), tag = document.getElementById("tag3d");
+    const btns = items.map((it, i) => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = it.label.split(" ")[0];
+      b.addEventListener("click", () => { cur = i; lastUser = performance.now(); lastSwitch = lastUser; sync(); });
+      picker.appendChild(b); return b;
+    });
+    function sync() { btns.forEach((b, i) => b.setAttribute("aria-pressed", i === cur ? "true" : "false")); tag.textContent = items[cur].label; }
+    sync();
+
+    function resize() {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      const vh = 2 * Math.tan(camera.fov * Math.PI / 360) * camera.position.z, vw = vh * camera.aspect;
+      items.forEach(it => { it.k = Math.max(.3, Math.min(vw * .36 / it.dimH, vh * .30 / it.dimV)); });
+      glow.scale.setScalar(Math.max(.4, Math.min(1.2, vw * .08)));
+    }
+    new ResizeObserver(resize).observe(stage); resize();
+
+    /* interação */
+    let drag = false, lx = 0, ly = 0, ux = 0, uy = 0, px = 0, py = 0, sy = 0;
+    canvas.addEventListener("pointerdown", e => { drag = true; lastUser = performance.now(); lx = e.clientX; ly = e.clientY; canvas.setPointerCapture(e.pointerId); });
+    canvas.addEventListener("pointermove", e => {
+      if (drag) { const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; ux += dx * .008; uy += dy * .006; }
+      else { const r = canvas.getBoundingClientRect(); px = ((e.clientX - r.left) / r.width - .5); py = ((e.clientY - r.top) / r.height - .5); }
+    });
+    const up = () => { drag = false; };
+    canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
+    addEventListener("scroll", () => { sy = Math.min(1, scrollY / 700); }, { passive: true });
+
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let visible = true;
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0 }).observe(stage);
+    const clock = new THREE.Clock();
+    function frame() {
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      const t = reduce ? 0 : clock.getElapsedTime();
+      const now = performance.now();
+      if (!reduce && !drag && now - lastUser > 9000 && now - lastSwitch > 6000) { cur = (cur + 1) % items.length; lastSwitch = now; sync(); }
+      if (!drag) { ux += (0 - ux) * .006; uy += (0 - uy) * .02; }
+      items.forEach((it, i) => {
+        it.s += ((i === cur ? 1 : 0) - it.s) * .12;
+        const on = it.s > .01; it.g.visible = on;
+        if (on) { it.g.scale.setScalar(it.k * it.s); it.inner.rotation.y = t * it.spin.v; }
+      });
+      root.rotation.y = -.85 + Math.sin(t * .45) * .35 + ux + sy * 1.4 + px * .25;
+      root.rotation.x = .18 + uy + py * .15;
+      root.rotation.z = -.05;
+      root.position.y = Math.sin(t * .9) * .08;
+      rimR.position.x = 6 + Math.sin(t * .6) * 1.5;
+      renderer.render(scene, camera);
+    }
+    frame();
+    document.fonts && document.fonts.ready.then(() => { /* texturas usam a fonte do site quando pronta */ });
+  } catch (err) {
+    document.documentElement.classList.add("no-webgl");
+  }
+})();
+</script>
+
+</body></html>
